@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ln -s /media/fred/EHD1/Fred/Code code
+
 # Variables
 USER="$(whoami)"
 
@@ -40,6 +42,9 @@ git clone https://github.com/fred-gutierrez/lazyvim-myconfig ~/.config/nvim
 sudo nala install tmux
 
 git clone https://github.com/fred-gutierrez/tmux-myconfig ~/.config/tmux
+
+# Install ScreenKey for detecting key input for Videos
+sudo nala install screenkey
 
 # Install Virtual Machine Manager and QEMU
 
