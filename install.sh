@@ -8,12 +8,12 @@ USER="$(whoami)"
 # Basic Installs
 sudo apt update
 
-# sudo apt install nala
-#
-# sudo nala install git
+sudo apt install nala
+
+sudo nala install git
 
 # Install homebrew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-linux
-# sudo apt install build-essential
+sudo apt install build-essential
 
 curl -fsSL -o brewInstall.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
@@ -47,10 +47,29 @@ git clone https://github.com/fred-gutierrez/tmux-myconfig ~/.config/tmux
 sudo nala install screenkey
 
 # Install Virtual Machine Manager and QEMU
+sudo nala install qemu-kvm qemu-system qemu-utils python3 python3-pip libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y
+
+sudo systemctl status libvirtd.service
+
+sudo virsh net-start default
+
+sudo virsh net-autostart default
+
+sudo virsh net-list --all
+
+sudo usermod -aG libvirt $USER
+sudo usermod -aG libvirt-qemu $USER
+sudo usermod -aG kvm $USER
+sudo usermod -aG input $USER
+sudo usermod -aG disk $USER
 
 # Install Razer Genie (Optional)
-
-# Install Solaar (Optional)
+sudo gpasswd -a $USER plugdev
 
 # Remove shiet libreoffice and install onlyoffice
 sudo nala remove --purge "libreoffice*"
+
+# Install Redshift and set it automatically
+
+# --- END --- #
+echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
