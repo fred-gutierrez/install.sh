@@ -12,41 +12,62 @@ sudo apt install nala
 
 sudo nala install git
 
-# Install homebrew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-linux
+# Homebrew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-linux
 sudo apt install build-essential
 
 curl -fsSL -o brewInstall.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
 /bin/bash brewInstall.sh
 
-if command -v brew &>/dev/null; then
-	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>/home/${USER}/.bashrc
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>/home/${USER}/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-	brew doctor
+if command -v brew &>/dev/null; then
+  brew install gcc
+  brew doctor
+  echo ""
+  echo "The homebrew installation may have an error, it's alright as long as the script installs gcc, node and neovim"
+  echo "The script will continue in 10 seconds..."
+  sleep 10
 else
-	echo "Homebrew installation failed"
+  echo ""
+  echo "Homebrew installation failed"
+  echo "The script will continue in 10 seconds..."
+  sleep 10
 fi
 
-# Install Neovim with current config (Lazyvim)
+# Neovim with current config (Lazyvim)
 if command -v brew &>/dev/null; then
-	brew install node
-	brew install neovim
+  brew install node
+  brew install neovim
 else
-	echo "Homebrew not available/installed to install node and neovim"
+  echo ""
+  echo "Homebrew not available/installed to install node and neovim"
+  echo "The script will continue in 10 seconds..."
+  sleep 10
 fi
 
 git clone https://github.com/fred-gutierrez/lazyvim-myconfig ~/.config/nvim
 
-# Install tmux
+# tmux
 sudo nala install tmux
 
 git clone https://github.com/fred-gutierrez/tmux-myconfig ~/.config/tmux
 
-# Install ScreenKey for detecting key input for Videos
+if tmux source ~/.config/tmux/tmux.conf; then
+  echo ""
+  echo "tmux configuration sourced successfully!"
+  sleep 5
+else
+  echo ""
+  echo "Failed to source tmux configuration, plugins won't work."
+  sleep 5
+fi
+
+# ScreenKey (for detecting key input for Videos)
 sudo nala install screenkey
 
-# Install Virtual Machine Manager and QEMU
+# Virtual Machine Manager and QEMU
 sudo nala install qemu-kvm qemu-system qemu-utils python3 python3-pip libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y
 
 sudo systemctl status libvirtd.service
@@ -63,13 +84,21 @@ sudo usermod -aG kvm $USER
 sudo usermod -aG input $USER
 sudo usermod -aG disk $USER
 
-# Install Razer Genie (Optional)
+# Razer Genie (Optional)
 sudo gpasswd -a $USER plugdev
 
-# Remove shiet libreoffice and install onlyoffice
+# Remove libreoffice (Onlyoffice is my preferred and can be installed by the software manager)
+echo ""
+echo "This next script is to remove LibreOffice (Which the preferred is Only Office via Software Manager"
+sleep 5
 sudo nala remove --purge "libreoffice*"
 
-# Install Redshift and set it automatically
+# Redshift and set it automatically
+
+# Font manager
+sudo nala install font-manager
 
 # --- END --- #
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
+echo "Things to note:"
+echo " - Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"

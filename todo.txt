@@ -1,0 +1,14 @@
+Todo:
+- Unable to copy/yank in tmux (xclip already installed)
+- Unable to move within the windows in Tmux (Only to the right? but not left)
+- Install Redshift
+
+Notes after first try of the script (8/10/2024):
+- QEMU installation went well (Yet to restart to verify) - It works!
+- Only Office didn't install but it did uninstall any sort of libreoffice - Added in the script to install it via the Software Manager
+- IMPORTANT: Tmux doesn't seem to be loading the plugins, for yank and git mainly.
+
+Done tasks:
+- Add the sudo nala install nvim to the script - The issue is with homebrew not working
+    - Homebrew must work as even nala installs 0.95 which is not the current stable version
+- Add the Nerd Font to the script
