@@ -54,15 +54,11 @@ sudo nala install tmux
 
 git clone https://github.com/fred-gutierrez/tmux-myconfig ~/.config/tmux
 
-if tmux source ~/.config/tmux/tmux.conf; then
-  echo ""
-  echo "tmux configuration sourced successfully!"
-  sleep 5
-else
-  echo ""
-  echo "Failed to source tmux configuration, plugins won't work."
-  sleep 5
-fi
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+sudo nala install golang-go
+
+go install github.com/arl/gitmux@latest
 
 # ScreenKey (for detecting key input for Videos)
 sudo nala install screenkey
@@ -102,3 +98,4 @@ sudo nala install font-manager
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
 echo "Things to note:"
 echo " - Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
+echo " - For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"

@@ -1,7 +1,6 @@
 Todo:
-- Unable to copy/yank in tmux (xclip already installed)
-- Unable to move within the windows in Tmux (Only to the right? but not left)
 - Install Redshift
+- Make the git status work in Tmux (Added the scripts to install the go compiler but gitmux is not present as a binary to execute)
 
 Notes after first try of the script (8/10/2024):
 - QEMU installation went well (Yet to restart to verify) - It works!
@@ -9,6 +8,8 @@ Notes after first try of the script (8/10/2024):
 - IMPORTANT: Tmux doesn't seem to be loading the plugins, for yank and git mainly.
 
 Done tasks:
+- Unable to copy/yank in tmux (xclip already installed)
+- Unable to move within the windows in Tmux (Only to the right? but not left)
 - Add the sudo nala install nvim to the script - The issue is with homebrew not working
     - Homebrew must work as even nala installs 0.95 which is not the current stable version
 - Add the Nerd Font to the script
