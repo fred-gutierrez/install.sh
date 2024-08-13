@@ -90,6 +90,28 @@ sleep 5
 sudo nala remove --purge "libreoffice*"
 
 # Redshift and set it automatically
+sudo nala install redshift redshift-gtk
+
+sudo apt-get install libxcb1-dev libxcb-randr0-dev libx11-dev
+
+touch ~/.config/redshift.conf #redshift.conf MUST be within the .config file and cannot be within any other folder
+
+cat <<EOL >~/.config/redshift.conf
+[redshift]
+temp-day=4000
+temp-night=4000
+transition=0
+gamma=1.0:1.0:1.0
+adjustment-method=randr
+location-provider=manual
+
+[manual]
+lat=0
+lon=0
+
+[randr]
+screen=0
+EOL
 
 # Font manager
 sudo nala install font-manager
