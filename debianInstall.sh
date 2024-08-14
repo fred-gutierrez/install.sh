@@ -81,7 +81,7 @@ sudo usermod -aG input $USER
 sudo usermod -aG disk $USER
 
 # Razer Genie (Optional)
-sudo gpasswd -a $USER plugdev
+# sudo gpasswd -a $USER plugdev
 
 # Remove libreoffice (Onlyoffice is my preferred and can be installed by the software manager)
 echo ""
