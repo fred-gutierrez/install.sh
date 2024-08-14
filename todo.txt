@@ -1,5 +1,4 @@
 Todo:
-- Make the git status work in Tmux (Added the scripts to install the go compiler but gitmux is not present as a binary to execute)
 
 Notes after first try of the script (8/10/2024):
 - QEMU installation went well (Yet to restart to verify) - It works!
@@ -7,6 +6,7 @@ Notes after first try of the script (8/10/2024):
 - IMPORTANT: Tmux doesn't seem to be loading the plugins, for yank and git mainly.
 
 Done tasks:
+- Make the git status work in Tmux (Added the scripts to install the go compiler but gitmux is not present as a binary to execute)
 - Install Redshift
 - Unable to copy/yank in tmux (xclip already installed)
 - Unable to move within the windows in Tmux (Only to the right? but not left)

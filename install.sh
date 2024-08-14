@@ -56,9 +56,9 @@ git clone https://github.com/fred-gutierrez/tmux-myconfig ~/.config/tmux
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-sudo nala install golang-go
+brew tap arl/arl
 
-go install github.com/arl/gitmux@latest
+brew install gitmux
 
 # ScreenKey (for detecting key input for Videos)
 sudo nala install screenkey
