@@ -116,6 +116,33 @@ EOL
 # Font manager
 sudo nala install font-manager
 
+# TLP | For laptops only
+install_tlp() {
+  echo "Installing TLP..."
+  sudo nala install tlp -y
+  echo "Starting TLP..."
+  sudo tlp start
+  echo "Configuring TLP for battery optimization..."
+  sudo tlp bat
+  echo "TLP installation and configuration completed."
+}
+
+# Prompt the user if they are using a laptop
+read -p "Are you using a laptop? (yes/no): " laptop_choice
+
+if [[ "$laptop_choice" == "yes" || "$laptop_choice" == "y" ]]; then
+  # Prompt the user if they want to install TLP
+  read -p "Do you want to install TLP for power management? (yes/no): " tlp_choice
+  if [[ "$tlp_choice" == "yes" || "$tlp_choice" == "y" ]]; then
+    install_tlp
+  else
+    echo "TLP installation skipped."
+    sleep 5
+  fi
+else
+  echo "This script is intended for laptops. TLP installation skipped."
+fi
+
 # --- END --- #
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
 echo "Things to note:"
