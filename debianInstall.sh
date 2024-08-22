@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ln -s /media/fred/EHD1/Fred/Code code
+# ln -s /media/fred/EHD1/Fred/Code dev-syncthing
 
 # Variables
 USER="$(whoami)"
@@ -127,7 +127,6 @@ install_tlp() {
   echo "TLP installation and configuration completed."
 }
 
-# Prompt the user if they are using a laptop
 read -p "Are you using a laptop? (yes/no): " laptop_choice
 
 if [[ "$laptop_choice" == "yes" || "$laptop_choice" == "y" ]]; then
@@ -143,8 +142,16 @@ else
   echo "This script is intended for laptops. TLP installation skipped."
 fi
 
+# Install Syncthing - http://127.0.0.1:8384
+sudo nala install syncthing
+
+sudo systemctl start syncthing@fred
+
+sudo systemctl enable syncthing@fred
+
 # --- END --- #
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
 echo "Things to note:"
-echo " - Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
-echo " - For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
+echo " - TERMINAL: Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
+echo " - TMUX: For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
+echo " - SYNCTHING: In order to enter syncthing and set it up, it must be entered from: http://127.0.0.1:8384 - Reference vid: https://youtu.be/PSx-BkMOPF4"
