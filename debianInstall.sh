@@ -80,8 +80,13 @@ sudo usermod -aG kvm $USER
 sudo usermod -aG input $USER
 sudo usermod -aG disk $USER
 
-# Razer Genie (Optional)
+# Razer Genie (Optional) - IMPORTANT: The download links vary on every distro - Check this page: https://software.opensuse.org//download.html?project=hardware%3Arazer&package=razergenie
+# The current commands are suited to work for a Debian 12 distro
 # sudo gpasswd -a $USER plugdev
+# echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
+# curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
+# sudo apt update
+# sudo apt install razergenie
 
 # Remove libreoffice (Onlyoffice is my preferred and can be installed by the software manager)
 echo ""
@@ -155,3 +160,4 @@ echo "Things to note:"
 echo " - TERMINAL: Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
 echo " - TMUX: For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
 echo " - SYNCTHING: In order to enter syncthing and set it up, it must be entered from: http://127.0.0.1:8384 - Reference vid: https://youtu.be/PSx-BkMOPF4"
+echo " - RAZERGENIE: If razer genie doesn't appear in the applications, check this script as the commands for that are commented"
