@@ -1,6 +1,12 @@
 #!/bin/bash
 
-# ln -s /media/fred/EHD1/Fred/Code dev-syncthing
+read -p "Do you want to create the symlink from the EHD to dev-syncthing? - For desktop - (yes/no)": symlink_choice
+
+if [[ "$symlink_choice" == "yes" || "$symlink_choice" == "y" ]]; then
+  ln -s /media/fred/EHD1/Fred/Code dev-syncthing
+else
+  echo "Skipping symlink creation..."
+fi
 
 # Variables
 USER="$(whoami)"
@@ -27,14 +33,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 if command -v brew &>/dev/null; then
   brew install gcc
   brew doctor
-  echo ""
   echo "The homebrew installation may have an error, it's alright as long as the script installs gcc, node and neovim"
-  echo "The script will continue in 10 seconds..."
-  sleep 10
+  sleep 5
 else
-  echo ""
   echo "Homebrew installation failed"
-  echo "The script will continue in 10 seconds..."
   sleep 10
 fi
 
@@ -43,9 +45,7 @@ if command -v brew &>/dev/null; then
   brew install node
   brew install neovim
 else
-  echo ""
   echo "Homebrew not available/installed to install node and neovim"
-  echo "The script will continue in 10 seconds..."
   sleep 10
 fi
 
@@ -67,6 +67,8 @@ read -p "Do you want to install Screenkey - For detecting key input for videos -
 
 if [[ "$screenkey_choice" == "yes" || "$screenkey_choice" == "y" ]]; then
   sudo nala install screenkey
+else
+  echo "Skipping Screenkey installation..."
 fi
 
 # Virtual Machine Manager and QEMU
@@ -115,11 +117,10 @@ if [[ "$razergenie_choice" == "yes" || "$razergenie_choice" == "y" ]]; then
     sudo nala install razergenie
   fi
 else
-  echo "Razer Genie installation skipped."
+  echo "Skipping Razer Genie installation..."
 fi
 
 # Remove libreoffice (Onlyoffice is my preferred and can be installed by the software manager)
-echo ""
 echo "This next script is to remove LibreOffice (Which the preferred is Only Office via Software Manager"
 sleep 5
 sudo nala remove --purge "libreoffice*"
@@ -150,6 +151,8 @@ lon=0
 [randr]
 screen=0
 EOL
+else
+  echo "Skipping Redshiift installation..."
 fi
 
 # Font manager
