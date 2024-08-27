@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Symlink EHD to Symlink folder (ONLY FOR DESKTOP)
 read -p "Do you want to create the symlink from the EHD to dev-syncthing? - For desktop - (yes/no)": symlink_choice
 
 if [[ "$symlink_choice" == "yes" || "$symlink_choice" == "y" ]]; then
