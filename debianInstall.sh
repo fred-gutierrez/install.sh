@@ -42,13 +42,7 @@ else
 fi
 
 # Neovim with current config (Lazyvim)
-if command -v brew &>/dev/null; then
-  brew install node
-  brew install neovim
-else
-  echo "Homebrew not available/installed to install node and neovim"
-  sleep 10
-fi
+brew install node neovim fzf
 
 git clone https://github.com/fred-gutierrez/lazyvim-myconfig ~/.config/nvim
 
