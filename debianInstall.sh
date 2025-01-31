@@ -24,25 +24,17 @@ sudo nala install xclip # Copy from the terminal
 # Homebrew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-linux
 sudo apt install build-essential
 
-curl -fsSL -o brewInstall.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
-/bin/bash brewInstall.sh
-
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>/home/${USER}/.bashrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-if command -v brew &>/dev/null; then
-  brew install gcc
-  brew doctor
-  echo "The homebrew installation may have an error, it's alright as long as the script installs gcc, node and neovim"
-  sleep 5
-else
-  echo "Homebrew installation failed"
-  sleep 10
-fi
+brew install gcc
+brew doctor
+echo "Homebrew was successfully installed!"
+sleep 5
 
 # Neovim with current config (Lazyvim)
-brew install node neovim fzf
+brew install node@22 neovim fzf
+
+brew link --overwrite --force node@22 #22 is the current LTS and this will set it as the path
 
 git clone https://github.com/fred-gutierrez/lazyvim-myconfig ~/.config/nvim
 
