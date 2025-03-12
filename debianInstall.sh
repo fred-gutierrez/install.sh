@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Symlink EHD to Symlink folder (ONLY FOR DESKTOP)
-read -p "Do you want to create the symlink from the EHD to dev-syncthing? - For desktop - (yes/no)": symlink_choice
-
-if [[ "$symlink_choice" == "yes" || "$symlink_choice" == "y" ]]; then
-  ln -s /media/fred/EHD1/Fred/Code dev-syncthing
-else
-  echo "Skipping symlink creation..."
-fi
-
 # Variables
 USER="$(whoami)"
 
@@ -24,7 +15,12 @@ sudo nala install xclip # Copy from the terminal
 # Homebrew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-linux
 sudo apt install build-essential
 
-curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+curl -fsSL -o brewInstall.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+
+/bin/bash brewInstall.sh
+
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>/home/${USER}/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 brew install gcc
 brew doctor
@@ -79,30 +75,16 @@ sudo usermod -aG disk $USER
 read -p "Do you want to install Razer Genie (yes/no): " razergenie_choice
 
 if [[ "$razergenie_choice" == "yes" || "$razergenie_choice" == "y" ]]; then
+  # These commands are suited to work for a Debian 12 distro
   sudo gpasswd -a $USER plugdev
-  echo "You can check which debian version you have by opening a new terminal and doing 'cat/etc/debian_version'"
-  read -p "Which distro would you like to download it for? (debian 11/debian 12/debian testing/debian unstable): " razergenie_distro_choice
 
-  if [[ "$razergenie_distro_choice" == "debian11" || "$razergenie_distro_choice" == "debian 11" ]]; then
-    echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
-    curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
-    sudo nala install razergenie
+  echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
 
-  elif [[ "$razergenie_distro_choice" == "debian12" || "$razergenie_distro_choice" == "debian 12" ]]; then
-    echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
-    curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
-    sudo nala install razergenie
+  curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
 
-  elif [[ "$razergenie_distro_choice" == "debiantesting" || "$razergenie_distro_choice" == "debian testing" ]]; then
-    echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_Testing/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
-    curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_Testing/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
-    sudo nala install razergenie
+  sudo apt update
 
-  elif [[ "$razergenie_distro_choice" == "debianunstable" || "$razergenie_distro_choice" == "debian unstable" ]]; then
-    echo 'deb http://download.opensuse.org/repositories/hardware:/razer/Debian_Unstable/ /' | sudo tee /etc/apt/sources.list.d/hardware:razer.list
-    curl -fsSL https://download.opensuse.org/repositories/hardware:razer/Debian_Unstable/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/hardware_razer.gpg >/dev/null
-    sudo nala install razergenie
-  fi
+  sudo apt install razergenie
 else
   echo "Skipping Razer Genie installation..."
 fi
@@ -177,5 +159,6 @@ echo "Things to note:"
 echo " - TERMINAL: Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
 echo " - TMUX: For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
 echo " - SYNCTHING: In order to enter syncthing and set it up, it must be entered from: http://127.0.0.1:8384 - Reference vid: https://youtu.be/PSx-BkMOPF4"
-echo " - RAZERGENIE: If razer genie doesn't appear in the applications, check this script as the commands for that are commented"
-echo " - DRIVERS (Desktop): ALWAYS check for a driver manager installed (Usually comes installed in Ubuntu and Mint) and install the recommended drivers."
+echo " - RAZERGENIE: If razer genie doesn't appear as an app, check if the distro is debian 12, otherwise search for the correct links - If it appears, but doesn't detect any device, then it requires a restart."
+echo "VERY IMPORTANT:"
+echo " - DRIVERS (Desktop): ALWAYS check for a driver manager app installed (Usually comes installed in Ubuntu and Mint) and install the recommended drivers."
