@@ -46,7 +46,7 @@ brew tap arl/arl
 brew install gitmux
 
 # ScreenKey (for detecting key input for Videos)
-read -p "Do you want to install Screenkey - For detecting key input for videos - (yes/no): " screenkey_choice
+read -p "Do you want to install Screenkey - For detecting key input for videos - (y/n): " screenkey_choice
 
 if [[ "$screenkey_choice" == "yes" || "$screenkey_choice" == "y" ]]; then
   sudo nala install screenkey
@@ -72,7 +72,7 @@ sudo usermod -aG input $USER
 sudo usermod -aG disk $USER
 
 # Razer Genie (Optional) - IMPORTANT: The download links vary on every distro - Check this page: https://software.opensuse.org//download.html?project=hardware%3Arazer&package=razergenie
-read -p "Do you want to install Razer Genie (yes/no): " razergenie_choice
+read -p "Do you want to install Razer Genie (y/n): " razergenie_choice
 
 if [[ "$razergenie_choice" == "yes" || "$razergenie_choice" == "y" ]]; then
   # These commands are suited to work for a Debian 12 distro
@@ -95,7 +95,7 @@ sleep 5
 sudo nala remove --purge "libreoffice*"
 
 # Redshift (and automatically configured)
-read -p "Do you want to install Redshift (yes/no): " redshift_choice
+read -p "Do you want to install Redshift (y/n): " redshift_choice
 
 if [[ "$redshift_choice" == 'yes' || "$redshift_choice" == 'y' ]]; then
   sudo nala install redshift redshift-gtk
@@ -128,11 +128,11 @@ fi
 sudo nala install font-manager
 
 # TLP | For laptops only
-read -p "Are you using a laptop? (yes/no): " laptop_choice
+read -p "Are you using a laptop? (y/n): " laptop_choice
 
 if [[ "$laptop_choice" == "yes" || "$laptop_choice" == "y" ]]; then
   # Prompt the user if they want to install TLP
-  read -p "Do you want to install TLP for power management? (yes/no): " tlp_choice
+  read -p "Do you want to install TLP for power management? (y/n): " tlp_choice
   if [[ "$tlp_choice" == "yes" || "$tlp_choice" == "y" ]]; then
     sudo nala install tlp -y
     sudo tlp start
@@ -152,6 +152,14 @@ sudo nala install syncthing
 sudo systemctl start syncthing@fred
 
 sudo systemctl enable syncthing@fred
+
+# Install gh and setup GitHub
+read -p "Do you want to setup github? - with gh (y/n)" github_setup_choice
+
+if [[ "$github_setup_choice" == "yes" || "$github_setup_choice" == "y" ]]; then
+  brew install gh
+  gh auth login
+fi
 
 # --- END --- #
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
