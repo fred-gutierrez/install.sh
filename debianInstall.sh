@@ -163,10 +163,12 @@ fi
 
 # --- END --- #
 echo "Please remember to restart for some of the installations to work (like Razergenie, QEMU, etc.)"
+echo "."
 echo "Things to note:"
 echo " - TERMINAL: Nerd fonts must be installed manually (https://www.nerdfonts.com/font-downloads)"
-echo " - TMUX: For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
 echo " - SYNCTHING: In order to enter syncthing and set it up, it must be entered from: http://127.0.0.1:8384 - Reference vid: https://youtu.be/PSx-BkMOPF4"
 echo " - RAZERGENIE: If razer genie doesn't appear as an app, check if the distro is debian 12, otherwise search for the correct links - If it appears, but doesn't detect any device, then it requires a restart."
+echo "."
 echo "VERY IMPORTANT:"
-echo " - DRIVERS (Desktop): ALWAYS check for a driver manager app installed (Usually comes installed in Ubuntu and Mint) and install the recommended drivers."
+echo " - TMUX: For tmux and it's plugins to work, run: tmux source ~/.config/tmux/tmux.conf - And enter to tmux and do prefix + I to install the plugins - The prefix is CTRL + Space"
+echo " - GRAPHIC DRIVERS: ALWAYS check for a driver manager app installed (Usually comes installed in Ubuntu and Mint) and install the recommended drivers."
